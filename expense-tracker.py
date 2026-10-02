@@ -1,8 +1,12 @@
-
+import datetime
+current_date = datetime.date.today()
+with open("expenses.txt", "a") as file:
+        file.write(f"---------------------------------------------------------- Date : {current_date} ----------------------------------------------------------\n\n\n")
+total = 0
 while True:
     item=input("Enter Item Name : ").strip().capitalize()
     price=float(input(f"Enter {item} Price: ").strip())
-
+    total += price
     with open("expenses.txt", "a") as file:
         file.write(f"The Item Is => {item}          , The Price Is => {price}    \n")
     print(" The Item Has Been Saved")
@@ -15,5 +19,10 @@ while True:
         else:
             print("Invalid Option , Please Try Again")
     if input_again in ["no" , 'n']:
-        print(" Thank You To Use Our App , Bye :)")
+        with open("expenses.txt", "a") as file:
+            file.write(f"----------------------------------------\n")
+            file.write(f"Total Expenses => {total} \n")
+            file.write(f"----------------------------------------\n")
+        print(f"\nTotal Expenses: {total}")
+        print("Thank You To Use Our App , Bye :)")
         break
